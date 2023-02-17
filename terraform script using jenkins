@@ -1,0 +1,20 @@
+pipeline{
+    agent any
+    stages{
+        stage('checkout terraform scripts'){
+            steps{
+                git branch: 'main', url: 'https://github.com/MannemHaritha/jenkins-terraform-pipeline.git'
+            }
+        }
+        stage('run terraform init'){
+            steps{
+                sh 'terraform init'
+            }
+        }
+        stage('terraform apply auto approve'){
+            steps{
+                sh 'terraform apply -auto-approve'
+            }
+        }
+    }
+}
